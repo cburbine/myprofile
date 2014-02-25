@@ -166,7 +166,7 @@ if ($_SESSION['msg']) {
 
         <script src="login_panel/js/slide.js" type="text/javascript"></script>
 
-<?php echo $script; ?>
+        <?php echo $script; ?>
     </head>
 
     <body>
@@ -184,21 +184,21 @@ if ($_SESSION['msg']) {
                     </div>
 
 
-        <?php
-        if (!$_SESSION['id']):
-            ?>
+                    <?php
+                    if (!$_SESSION['id']):
+                        ?>
 
                         <div class="left">
                             <!-- Login Form -->
                             <form class="clearfix" action="" method="post">
                                 <h1>Member Login</h1>
 
-    <?php
-    if ($_SESSION['msg']['login-err']) {
-        echo '<div class="err">' . $_SESSION['msg']['login-err'] . '</div>';
-        unset($_SESSION['msg']['login-err']);
-    }
-    ?>
+                                <?php
+                                if ($_SESSION['msg']['login-err']) {
+                                    echo '<div class="err">' . $_SESSION['msg']['login-err'] . '</div>';
+                                    unset($_SESSION['msg']['login-err']);
+                                }
+                                ?>
 
                                 <label class="grey" for="username">Username:</label>
                                 <input class="field" type="text" name="username" id="username" value="" size="23" />
@@ -235,9 +235,9 @@ if ($_SESSION['msg']) {
                             </form>
                         </div>
 
-                                <?php
-                            else:
-                                ?>
+                        <?php
+                    else:
+                        ?>
 
                         <div class="left">
 
@@ -253,9 +253,9 @@ if ($_SESSION['msg']) {
                         <div class="left right">
                         </div>
 
-<?php
-endif;
-?>
+                    <?php
+                    endif;
+                    ?>
                 </div>
             </div> <!-- /login -->	
 
@@ -274,3 +274,20 @@ endif;
             </div> <!-- / top -->
 
         </div> <!--panel -->
+
+        <div id="main">
+            <div class="container">
+                <h1>My Profile</h1>
+            </div>
+            <div class="container">
+                <?php
+                if ($_SESSION['id']){
+                    echo 'Hello '. $_SESSION['usr'];
+                } else {
+                     echo '<h2>Please, <a href="demo.php">login</a> and come back later!</h2>';
+                }
+                ?>
+            </div>
+        </div>
+    </body>
+</html>
