@@ -282,7 +282,7 @@ if ($_SESSION['msg']) {
             <div class="container">
                 <?php
                 if ($_SESSION['id']){
-                    echo 'Hello '. $_SESSION['usr'];
+                    echo 'Hello '. $_SESSION['usr'].'.';
                 } else {
                      echo '<h2>Please, <a href="demo.php">login</a> and come back later!</h2>';
                 }
