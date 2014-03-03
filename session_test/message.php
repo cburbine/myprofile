@@ -29,7 +29,7 @@ if (isset($_GET['logoff'])) {
     $_SESSION = array();
     session_destroy();
 
-    header("Location: tab_template.php");
+    header("Location: message.php");
     exit;
 }
 
@@ -70,7 +70,7 @@ if ($_POST['submit'] == 'Login') {
         $_SESSION['msg']['login-err'] = implode('<br />', $err);
     // Save the error messages in the session
 
-    header("Location: tab_template.php");
+    header("Location: message.php");
     exit;
 }
 else if ($_POST['submit'] == 'Register') {
@@ -103,14 +103,14 @@ else if ($_POST['submit'] == 'Register') {
 
         mysql_query(" INSERT INTO tz_members(usr,pass,email,regIP,dt)
 						VALUES(
-											
-															  '" . $_POST['username'] . "',
-															       			      '" . md5($pass) . "',
-																		      	   	      	  '" . $_POST['email'] . "',
-																					       		       	   '" . $_SERVER['REMOTE_ADDR'] . "',
-																								      				    NOW()
-																												          
-																													       )");
+															 
+															                 '" . $_POST['username'] . "',
+																	      			                             '" . md5($pass) . "',
+																							     	  	                                        '" . $_POST['email'] . "',
+																														     		                                           '" . $_SERVER['REMOTE_ADDR'] . "',
+																																					      				                                   NOW()
+																																													                                        
+																																																		                                   )");
 
         if (mysql_affected_rows($link) == 1) {
             send_mail('demo-test@tutorialzine.com', $_POST['email'], 'Registration System Demo - Your New Password', 'Your password is: ' . $pass);
@@ -124,7 +124,7 @@ else if ($_POST['submit'] == 'Register') {
         $_SESSION['msg']['reg-err'] = implode('<br />', $err);
     }
 
-    header("Location: tab_template.php");
+    header("Location: message.php");
     exit;
 }
 
@@ -136,13 +136,13 @@ if ($_SESSION['msg']) {
     $script = '
     <script type="text/javascript">
     
-	$(function(){
-		
+    $(function(){
+	
 				$("div#panel").show();
-						$("#toggle a").toggle();
-							   });
-							   
-							   </script>';
+									$("#toggle a").toggle();
+															   });
+															            
+																             </script>';
 }
 ?>
 
@@ -151,7 +151,7 @@ if ($_SESSION['msg']) {
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>NCBookStack</title>
+        <title>New Message</title>
 
         <link rel="stylesheet" type="text/css" href="demo.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="login_panel/css/slide.css" media="screen" />
@@ -166,7 +166,7 @@ if ($_SESSION['msg']) {
 
         <script src="login_panel/js/slide.js" type="text/javascript"></script>
 
-<?php echo $script; ?>
+        <?php echo $script; ?>
     </head>
 
     <body>
@@ -184,21 +184,21 @@ if ($_SESSION['msg']) {
                     </div>
 
 
-        <?php
-        if (!$_SESSION['id']):
-            ?>
+                    <?php
+                    if (!$_SESSION['id']):
+                        ?>
 
                         <div class="left">
                             <!-- Login Form -->
                             <form class="clearfix" action="" method="post">
                                 <h1>Member Login</h1>
 
-    <?php
-    if ($_SESSION['msg']['login-err']) {
-        echo '<div class="err">' . $_SESSION['msg']['login-err'] . '</div>';
-        unset($_SESSION['msg']['login-err']);
-    }
-    ?>
+                                <?php
+                                if ($_SESSION['msg']['login-err']) {
+                                    echo '<div class="err">' . $_SESSION['msg']['login-err'] . '</div>';
+                                    unset($_SESSION['msg']['login-err']);
+                                }
+                                ?>
 
                                 <label class="grey" for="username">Username:</label>
                                 <input class="field" type="text" name="username" id="username" value="" size="23" />
@@ -235,9 +235,9 @@ if ($_SESSION['msg']) {
                             </form>
                         </div>
 
-                                <?php
-                            else:
-                                ?>
+                        <?php
+                    else:
+                        ?>
 
                         <div class="left">
 
@@ -253,9 +253,9 @@ if ($_SESSION['msg']) {
                         <div class="left right">
                         </div>
 
-<?php
-endif;
-?>
+                    <?php
+                    endif;
+                    ?>
                 </div>
             </div> <!-- /login -->	
 
@@ -267,10 +267,27 @@ endif;
                     <li class="sep">|</li>
                     <li id="toggle">
                         <a id="open" class="open" href="#"><?php echo $_SESSION['id'] ? 'Open Panel' : 'Log In | Register'; ?></a>
-                        <a id="close" style="display: none;" class="close" href="#">Close Panel</a>    	    
+                        <a id="close" style="display: none;" class="close" href="#">Close Panel</a>    	        
                     </li>
                     <li class="right">&nbsp;</li>
                 </ul> 
             </div> <!-- / top -->
 
         </div> <!--panel -->
+
+        <div id="main">
+            <div class="container">
+                <h1>New Message</h1>
+            </div>
+            <div class="container">
+                <?php
+                if ($_SESSION['id']){
+                    echo 'Hello '. $_SESSION['usr'].'.';
+                } else {
+                     echo '<h2>Please, <a href="demo.php">login</a> and come back later!</h2>';
+                }
+                ?>
+            </div>
+        </div>
+    </body>
+</html>

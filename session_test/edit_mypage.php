@@ -283,16 +283,30 @@ endif;
         if($_SESSION['id']){
 	  $user = $_SESSION['usr'];
 	  $data =  mysql_query("SELECT * FROM tz_members WHERE usr LIKE'%$user%'")or die('Error: '.mysql_error());
-	  #echo '';
+	  echo '<form method="post" >';
 	  while($result = mysql_fetch_array($data)){
 	    echo '<p><strong>Username</strong>:
-              <input type="text" value="'.$result['usr'].'" name="usr"/>
-              <input type="submit" value="Submit" name="sub_usr"/>
+              <input type="text" value="'.$result['usr'].'" name="new_usr"/>
               </p>';
 	    echo '<p><strong>Email</strong>:
-	      <input type="text" value="'.$result['email'].'" name="email"/>
-	      <input type="submit" value="Submit" name="sub_email"/>
+	      <input type="text" value="'.$result['email'].'" name="new_email" />
 	      </p>';
+	    echo '<p><input type="submit" name="insert" value="Save"/></p>';
+	  }
+	  echo '</form>';
+
+	  if(isset($_POST['insert'])){
+	    $new_username = $_POST['new_usr'];
+	    $new_email    = $_POST['new_email'];
+
+	    $sql = mysql_query("UPDATE tz_members SET usr = '$new_username', email = '$new_email' WHERE usr = '$user'") or die('SQL Error: '.mysql_error());
+	    $sql_result = mysql_query($doc,$sql);
+	    
+	    if($sql_result){
+	      $success = '<p> Updated. </p>';
+	    }
+	    
+	    header("Location: mypage.php");
 	  }
 	  
 	} else {

@@ -6,9 +6,9 @@ if(!defined('INCLUDE_CHECK')) die('You are not allowed to execute this file dire
 /* Database config */
 
 $db_host		= 'localhost';
-$db_user		= '*********';
-$db_pass		= '*********';
-$db_database            = '*********'; 
+$db_user		= 'cburbine';
+$db_pass		= 'cb2788';
+$db_database	= 'cburbine'; 
 
 /* End config */
 
