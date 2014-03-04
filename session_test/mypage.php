@@ -159,13 +159,11 @@ $script = '
         <div id="toppanel">
             <div id="panel">
                 <div class="content clearfix">
-                    <div class="left">
-                        <h1>The Sliding jQuery Panel</h1>
-                        <h2>A register/login solution</h2>		
+                    <!--<div class="left">
+                        <h1>NCBookStack</h1>
+                        <h2></h2>		
                         <p class="grey">You are free to use this login and registration system in you sites!</p>
-                        <h2>A Big Thanks</h2>
-                        <p class="grey">This tutorial was built on top of <a href="http://web-kreation.com/index.php/tutorials/nice-clean-sliding-login-panel-built-with-jquery" title="Go to site">Web-Kreation</a>'s amazing sliding panel.</p>
-                    </div>
+                    </div>-->
 
 
         <?php
@@ -175,7 +173,7 @@ $script = '
                         <div class="left">
                             <!-- Login Form -->
                             <form class="clearfix" action="" method="post">
-                                <h1>Member Login</h1>
+                                <h1>Login</h1>
 
     <?php
     if ($_SESSION['msg']['login-err']) {
@@ -225,17 +223,41 @@ $script = '
 
                         <div class="left">
 
-                            <h1>Members panel</h1>
+                            <h1>Welcome!</h1>
 
-                            <p>You can put member-only data here</p>
-                            <a href="registered.php">View a special member page</a>
-                            <p>- or -</p>
+                            <p><a href="#">Home</a> | 
+			    <a href="http://weblab.cs.uml.edu/~cburbine/session_test/mypage.php">My Profile</a> | 
+			    <a href="#">New Message</a></p>  
+			    
+                            <p>- - -</p>
                             <a href="?logoff">Log off</a>
 
                         </div>
 
                         <div class="left right">
                         </div>
+			<script src="autoComp.js"></script>
+			<div class="search">
+			<h1>Search</h1>
+			<br>
+			<form name="search" method="post" action="http://weblab.cs.uml.edu/~nwarren/search.php">
+    			Search for: 
+    			<!--Search value -->
+    			<input type="text" name="find" id="find"> in
+    			<!--Category to search in-->
+    			<select name="field" id="searchCriteria">
+        		<option value="title">Title</option>
+        		<option value="edition">Edition</option>
+        		<option value="author">Author</option>
+        		<option value="price">Price</option>
+        		<option value="subject_number">Subject</option>
+        		<option value="class_number">Class</option>
+        		<option value="isbn">ISBN Number</option>
+    			</select>
+    			<input type="submit" name="search" value="Search" />
+			</form>
+			
+			</div>
 
 <?php
 endif;
@@ -268,7 +290,7 @@ endif;
         if($_SESSION['id']){
 	   $user = $_SESSION['usr'];
 	   #echo $_SESSION['usr'];
-	   $data = mysql_query("SELECT * FROM tz_members WHERE usr LIKE'%$user%'")or die('Error: '.mysql_error());
+	   $data = mysql_query("SELECT * FROM tz_members WHERE usr LIKE'%$user%'")or die('Error: '.mysql_error());	   
 	   if(!$data){
 	     echo 'Could not run: '.mysql_error();
 	     exit;
@@ -276,6 +298,7 @@ endif;
 	   while($result = mysql_fetch_array($data)){
 	     echo '<p><strong>Username</strong>: '   .$result['usr'].  '</p>';
 	     echo '<p><strong>Email</strong>: '      .$result['email'].'</p>';
+	     
 	   }
 	echo '<div class="container">';
 	echo '<h3><strong>Books for Sale</strong></h3>';
